@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <title>My Website</title>
+</head>
+<style>
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .thumbnails a {
+    display: block;
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .thumbnails img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } 
+  
+  .thumbnails video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+  }
+
+  .lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lightbox .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .lightbox .content {
+    max-width: 80%;
+    max-height: 80%;
+  }
+
+  .lightbox img,
+  .lightbox video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<body>
+  <main>
+    <h1>Welcome to My Website</h1>
+  </main>
+  <div class="gallery">
+    <div id="thumbnails-container" class="thumbnails">
+    </div>
+   
+    
+    <div class="lightbox">
+      <span class="close-button">&times;</span>
+      <div class="content"></div>
+    </div>
+  </div>
+
+  <!-- <div style="width: 469px; height: 468px; margin-top: 0px; margin-left: 0px;">
+    <video src="images/01 - _VID-20210311-WA0011.mp4" preload="metadata" loop="" controlslist="nodownload" disablepictureinpicture="" type="video/mp4" poster="https://static.wixstatic.com/media/567303_e07ff60e0132442c84d3f403b0d631b8f003.jpg/v1/fill/w_331,h_589,q_90/567303_e07ff60e0132442c84d3f403b0d631b8f003.jpg" playsinline="" webkit-playsinline="" x5-playsinline="" style="height: auto; width: calc(100% + 1px); position: absolute; margin: auto; min-height: 100%; min-width: 100%; inset: -100%;"></video>
+    <img src="https://static.wixstatic.com/media/567303_e07ff60e0132442c84d3f403b0d631b8f003.jpg/v1/fill/w_469,h_468,q_90/567303_e07ff60e0132442c84d3f403b0d631b8f003.jpg" alt="untitled image" loading="eager" style="width: 469px; height: 468px;">
+  </div> -->
+  <!-- <script src="work.js"></script> -->
+</body>
+<script>
+  function createThumbnails() {
+  const files = 
+              [
+                "IMG_3971.jpeg",
+                "IMG-20210311-WA0016.jpg",
+                "39 - IMG_0456.mov",
+                "Untitled.jpeg",
+                "IMG_0442.JPG",
+                "12 - IMG_6537.mov",
+                "IMG_9735.JPG",
+                "14 - _VID-20210311-WA0023.mp4",
+                "IMG_1251.jpeg",
+                "24 - IMG_0441.mov",
+                "20 - IMG_6666.mov",
+                "pic01.jpg",
+                "34 - IMG_0450.mov",
+                "IMG_3996.jpeg",
+                "IMG-20210311-WA0014.jpg",
+                "IMG_9741.JPG",
+                "IMG_5115.JPG",
+                "Untitled_edited.jpg",
+                "14 - IMG_6537.mov",
+                "36 - IMG_0449.mov",
+                "IMG-20210311-WA0020.jpg",
+                "pic06.jpg",
+                "IMG_1429.JPG",
+                "IMG_6013.jpeg",
+                "IMG_0452.JPG",
+                "IMG_6433.jpeg",
+                "IMG_0438.JPG",
+                "IMG_1940.jpeg",
+                "06 - IMG_5423.mov",
+                "29 - IMG_0446.mov",
+                "IMG_6426.jpeg",
+                "IMG-20210311-WA0015.jpg",
+                "IMG_6116.jpeg",
+                "E5926E83-6B53-4815-8CAD-ACE82085C295.JPG",
+                "IMG_1411.JPG",
+                "IMG_1937.jpeg",
+                "IMG_9741_edited.jpg",
+                "03 - _VID-20210311-WA0005.mp4",
+                "07 - IMG_5602.mov",
+                "IMG_4136.jpeg",
+                "Logo2_Update.png",
+                "IMG_1379",
+                "IMG_1939.jpeg",
+                "26 - IMG_5423.mp4",
+                "IMG-20210311-WA0017.jpg",
+                "IMG_1957.jpeg",
+                "pic02.jpg",
+                "IMG_9738.JPG",
+                "IMG_5426.jpeg",
+                "IMG_0244.JPG",
+                "03 - IMG_5680.mov",
+                "pic08.jpg",
+                "IMG_1255.jpeg",
+                "result_img_2021_03_11_20_22_03.jpg",
+                "62456369997__9C53EF79-5700-4335-8E94-B1B662BD05A6.JPG",
+                "banner.jpg",
+                "IMG_1958.jpeg",
+                "43 - IMG_0444.mov",
+                "IMG-20210311-WA0012.jpg",
+                "IMG_6390.JPG",
+                "10 - IMG_6948.mov",
+                "IMG_6014.jpeg",
+                "IMG-20210311-WA0021.jpg",
+                "IMG-20210311-WA0018.jpg",
+                "IMG_3995.jpeg",
+                "23 - IMG_0443.mov",
+                "IMG-20210311-WA0022.jpg",
+                "04 - IMG_6537.mov",
+                "daniels_polishing.jpg",
+                "IMG_6986.jpeg",
+                "IMG_5684.jpeg",
+                "IMG_6437.jpeg",
+                "IMG_9739.JPG",
+                "IMG_0437.JPG",
+                "pic03.jpg",
+                "pic07.jpg",
+                "IMG_4138.jpeg",
+                "IMG_9736.JPG",
+                "IMG_0448.JPG",
+                "IMG_9734.JPG",
+                "IMG-20210311-WA0019.jpg",
+                "pic04.jpg",
+                "01 - _VID-20210311-WA0011.mp4",
+                "33 - IMG_0447.mov",
+                "46 - IMG_5039.mov",
+                "pic05.jpg",
+                "05 - _VID-20210311-WA0006.mp4",
+                "IMG_4139.jpeg",
+                "04 - _VID-20210311-WA0008.mp4",
+                "IMG_9737.JPG",
+                "42 - IMG_0440.mov",
+                "IMG_4001.jpeg",
+                "IMG_1379_edited.png",
+                "02 - IMG_6948.mov",
+                "40 - IMG_0451.mov",
+                "02 - _VID-20210311-WA0009.mp4",
+                "IMG_9740.JPG",
+                "IMG_6963.jpeg"
+            ];
+
+  const thumbnailsContainer = document.getElementById("thumbnails-container");
+
+  // files.forEach((file) => {
+  //   const thumbnail = document.createElement("a");
+  //   const thumbnail_img = document.createElement("img");
+
+  //   thumbnail.className = "bordered-feature-image";
+  //   thumbnail.href = "images/" + file;
+
+  //   thumbnail_img.src = "images/" + file; // Replace "path/to/thumbnails/" with the actual path to your thumbnail images
+  //   thumbnail_img.alt = file;
+    
+  //   thumbnail.appendChild(thumbnail_img);
+  //   thumbnailsContainer.appendChild(thumbnail);
+  // });
+
+    files.forEach((file) => {
+    const thumbnail = document.createElement("a");
+    const thumbnail_img = document.createElement("img");
+
+    thumbnail.target = '_blank';
+    thumbnail.className = "bordered-feature-image";
+    thumbnail.href = "images/" + file;
+
+    // Check if the file is a video
+    if (file.endsWith(".mp4") || file.endsWith(".mov")) {
+      thumbnail.onclick = play_video(event);
+      // Create a video element to capture the thumbnail
+      const video = document.createElement("video");
+      video.src = "images/" + file;
+
+      // When the video metadata is loaded, set the thumbnail
+      video.addEventListener("loadedmetadata", function () {
+        // Set the time to capture the thumbnail (in seconds)
+        const time = 5;
+
+        // Create a canvas element
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Draw the video frame on the canvas at the specified time
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Get the data URL of the canvas as an image
+        const thumbnailURL = canvas.toDataURL();
+
+        // Set the thumbnail image source
+        thumbnail_img.src = thumbnailURL;
+        thumbnail.appendChild(video)
+      });
+    } else {
+      // Set the thumbnail image source directly for image files
+      thumbnail_img.src = "images/" + file;
+      thumbnail_img.alt = file;
+      // Append the thumbnail image to the anchor element
+      thumbnail.appendChild(thumbnail_img);   
+    }
+
+
+    
+
+    // Append the thumbnail to the thumbnails container
+    thumbnailsContainer.appendChild(thumbnail);
+  });
+
+}
+
+// Run the createThumbnails function when the page has finished loading
+window.addEventListener("load", createThumbnails);
+
+function play_video(event) {
+    event.preventDefault();
+    window.open(event.target.href, "_blank");
+  }
+</script>
+
+</html>
